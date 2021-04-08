@@ -23,6 +23,12 @@ const globalStyles = StyleSheet.create({
         borderColor:'#ccc',
         padding:10,
         marginBottom:10
+    },
+    h1:{
+        fontSize:30
+    },
+    alignCenter:{
+        textAlign:'center'
     }
 });
 

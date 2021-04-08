@@ -1,32 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
-import globalStyles from '../styles/globalStyles';
+import gStyle from '../styles/globalStyles';
 import {TButton} from '../components/Elements';
 
-const {border2, margin10,marginBtm10, padding10, colorRed, inputText} = globalStyles;
-
 const SignupScreen = ({navigation})=>{
-    return (
-       <>
-        <Text style={[border2,margin10,padding10, colorRed]}>Signup Screen</Text>
-        <View style={margin10}>
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-            <TextInput placeholder="Email" style={[inputText]}/>
-            <TextInput placeholder="Password" style={[inputText]}/>
+    return (
+        <View style={[gStyle.margin10,styles.view]}>
+            <Text style={[gStyle.h1, gStyle.alignCenter, styles.signUpText]}>Sign Up for Tracker</Text>
+            
+            <TextInput 
+                placeholder="Email" 
+                style={gStyle.inputText}
+                value={email}
+                onChangeText={(value)=>setEmail(value)}
+                autoCapitalize='none'
+                autoCorrect={false}
+                autoCompleteType='email'
+            />
+            <TextInput 
+                placeholder="Password" 
+                style={gStyle.inputText}
+                value={password}
+                onChangeText={(value)=>setPassword(value)}
+                autoCapitalize='none'
+                autoCorrect={false}
+                secureTextEntry
+            />
 
             <TButton 
-                title="new button" 
+                title="Sign Up" 
                 buttonStyles={[
-                    marginBtm10,
-                    {backgroundColor:'red', marginTop:30}
+                    gStyle.marginBtm10,
+                    {marginTop:20}
                 ]} 
             />
-            
             
             <TButton 
                 title="Go to Sign in" 
                 buttonStyles={[
-                    marginBtm10,
+                    gStyle.marginBtm10,
                     {backgroundColor:'#3d61ad'}
                 ]} 
                 onPress={()=>navigation.navigate('Signin')}
@@ -35,7 +50,7 @@ const SignupScreen = ({navigation})=>{
             <TButton 
                 title="Go to main flow" 
                 buttonStyles={[
-                    marginBtm10,
+                    gStyle.marginBtm10,
                     {backgroundColor:'#81e1af'}
                 ]}
                 textStyle={[
@@ -44,13 +59,24 @@ const SignupScreen = ({navigation})=>{
                 onPress={()=>navigation.navigate('mainFlow')}/>
 
         </View>
-        
-       </>
     );
 };
 
-const styles = StyleSheet.create({ 
+SignupScreen.navigationOptions = ()=>{
+    return {
+        headerShown:false
+    };
+};
 
+
+const styles = StyleSheet.create({ 
+    view:{
+        flex:1,
+        justifyContent:'center'
+    },
+    signUpText:{
+        marginBottom:30
+    }
 });
 
 export default SignupScreen;
