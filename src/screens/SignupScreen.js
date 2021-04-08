@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import gStyle from '../styles/globalStyles';
-import {TButton} from '../components/Elements';
+import CustomEmelents from '../components/Elements';
+
+const {TButton} = CustomEmelents();
 
 const SignupScreen = ({navigation})=>{
     const [email, setEmail] = useState('');
