@@ -16,7 +16,7 @@ const globalStyles = StyleSheet.create({
     },
     colorRed:{
         color:'red',
-        fontSize:40
+        fontSize:12
     },
     inputText:{
         borderWidth:2,

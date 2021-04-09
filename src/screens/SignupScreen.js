@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import gStyle from '../styles/globalStyles';
 import CustomEmelents from '../components/Elements';
+import {Context as AuthContext} from '../context/AuthContext';
 
 const {TButton} = CustomEmelents();
 
 const SignupScreen = ({navigation})=>{
+    const {state, signUp} = useContext(AuthContext);
+    console.log(state);
+    const [name, setName] = useState('');
+    const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -13,6 +18,24 @@ const SignupScreen = ({navigation})=>{
         <View style={[gStyle.margin10,styles.view]}>
             <Text style={[gStyle.h1, gStyle.alignCenter, styles.signUpText]}>Sign Up for Tracker</Text>
             
+            <TextInput 
+                placeholder="Name" 
+                style={gStyle.inputText}
+                value={name}
+                onChangeText={(value)=>setName(value)}
+                autoCapitalize='none'
+                autoCorrect={false}
+            />
+
+            <TextInput 
+                placeholder="Age" 
+                style={gStyle.inputText}
+                value={age}
+                onChangeText={(value)=>setAge(value)}
+                autoCapitalize='none'
+                autoCorrect={false}
+            />
+
             <TextInput 
                 placeholder="Email" 
                 style={gStyle.inputText}
@@ -22,6 +45,7 @@ const SignupScreen = ({navigation})=>{
                 autoCorrect={false}
                 autoCompleteType='email'
             />
+
             <TextInput 
                 placeholder="Password" 
                 style={gStyle.inputText}
@@ -32,12 +56,16 @@ const SignupScreen = ({navigation})=>{
                 secureTextEntry
             />
 
+            {state.errorMessage?<Text style={[gStyle.alignCenter, gStyle.colorRed,gStyle.marginBtm10]}>{state.errorMessage}</Text>: null}
+
+
             <TButton 
                 title="Sign Up" 
                 buttonStyles={[
                     gStyle.marginBtm10,
                     {marginTop:20}
                 ]} 
+                onPress={()=>signUp({name, age, email, password})}
             />
             
             <TButton 
