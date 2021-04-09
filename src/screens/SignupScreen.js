@@ -8,7 +8,6 @@ const {TButton} = CustomEmelents();
 
 const SignupScreen = ({navigation})=>{
     const {state, signUp} = useContext(AuthContext);
-    console.log(state);
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
