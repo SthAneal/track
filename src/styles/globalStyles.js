@@ -7,6 +7,12 @@ const globalStyles = StyleSheet.create({
     marginBtm10:{
         marginBottom:10
     },
+    marginTop20:{
+        marginTop:20
+    },
+    marginBtm20:{
+        marginBottom:20
+    },
     padding10:{
         padding:10
     },

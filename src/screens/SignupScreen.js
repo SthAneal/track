@@ -1,5 +1,7 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
+import {NavigationEvents} from 'react-navigation';
+
 import gStyle from '../styles/globalStyles';
 import CustomEmelents from '../components/Elements';
 import {Context as AuthContext} from '../context/AuthContext';
@@ -7,14 +9,21 @@ import {Context as AuthContext} from '../context/AuthContext';
 const {TButton} = CustomEmelents();
 
 const SignupScreen = ({navigation})=>{
-    const {state, signUp} = useContext(AuthContext);
+    const {state, signUp, resetErrorMsg, autoSignIn} = useContext(AuthContext);
+
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    useEffect(()=>{
+        autoSignIn();
+    },[]);
+
     return (
         <View style={[gStyle.margin10,styles.view]}>
+            <NavigationEvents onWillFocus={()=>resetErrorMsg('')} />
+
             <Text style={[gStyle.h1, gStyle.alignCenter, styles.signUpText]}>Sign Up for Tracker</Text>
             
             <TextInput 
@@ -60,6 +69,7 @@ const SignupScreen = ({navigation})=>{
 
             <TButton 
                 title="Sign Up" 
+                type="button"
                 buttonStyles={[
                     gStyle.marginBtm10,
                     {marginTop:20}
@@ -68,16 +78,18 @@ const SignupScreen = ({navigation})=>{
             />
             
             <TButton 
-                title="Go to Sign in" 
+                title="Already have an account? Sign in" 
                 buttonStyles={[
-                    gStyle.marginBtm10,
-                    {backgroundColor:'#3d61ad'}
+                    gStyle.marginBtm20,
+                    gStyle.marginTop20
                 ]} 
+                textStyle={{color:'blue', textTransform:'none'}}
                 onPress={()=>navigation.navigate('Signin')}
             />
             
             <TButton 
                 title="Go to main flow" 
+                type="button"
                 buttonStyles={[
                     gStyle.marginBtm10,
                     {backgroundColor:'#81e1af'}
