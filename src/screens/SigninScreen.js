@@ -70,7 +70,7 @@ const SigninScreen = ({navigation})=>{
 
 SigninScreen.navigationOptions = ()=>{
     return {
-        headerShown: false
+        headerShown: true
     }
 }
 

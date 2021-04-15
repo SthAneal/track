@@ -9,12 +9,14 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 
 import {Provider} from './src/context/AuthContext';
 import {setNavigator} from './src/navigationRef';
 
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen
@@ -29,7 +31,7 @@ const switchNavigator = createSwitchNavigator({
   })
 },
 {
-  initialRouteName:'loginFlow',
+  initialRouteName:'ResolveAuth',
   defaultNavigationOptions:{
     title:'My Tracks'
   }

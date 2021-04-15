@@ -10,6 +10,8 @@ const authReducer = (state, action)=>{
             return {...state, errorMessage: action.payload}
         case 'SIGN_UP':
             return {errorMessage:'', token: action.payload}
+        case 'SIGN_OUT':
+            return {token: null, errorMessage: ''}
         case 'RESET_ERROR_MSG':
             return {...state, errorMessage: action.payload}
         default:
@@ -52,10 +54,12 @@ const autoSignIn = (dispatch)=>{
                     'Authorization':`Bearer ${token}`
                 }
             });
-            
-            navigate('TrackList');
+            setTimeout(()=>{
+                navigate('TrackList');
+            },1000);
             
         } catch (err) {
+            await AsyncStorage.removeItem('token');
             navigate('Signup');
         }
         
@@ -64,8 +68,22 @@ const autoSignIn = (dispatch)=>{
 
 
 const signOut = (dispatch)=>{
-    return ()=>{
-
+    return async ()=>{
+        const token = await AsyncStorage.getItem('token');
+        console.log(token);
+        try {
+            const user = await trackerApi.post('/users/logout',{},{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
+            await AsyncStorage.removeItem('token');
+            dispatch({type:'SIGN_OUT'});
+            navigate('loginFlow');
+        } catch (error) {
+            dispatch({type:'ADD_ERROR', payload:'Something went wrong, please try again!'});
+            console.log(error);
+        }
     };
 };
 

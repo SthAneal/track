@@ -9,16 +9,12 @@ import {Context as AuthContext} from '../context/AuthContext';
 const {TButton} = CustomEmelents();
 
 const SignupScreen = ({navigation})=>{
-    const {state, signUp, resetErrorMsg, autoSignIn} = useContext(AuthContext);
+    const {state, signUp, resetErrorMsg} = useContext(AuthContext);
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    useEffect(()=>{
-        autoSignIn();
-    },[]);
 
     return (
         <View style={[gStyle.margin10,styles.view]}>

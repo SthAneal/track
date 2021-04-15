@@ -35,6 +35,10 @@ const globalStyles = StyleSheet.create({
     },
     alignCenter:{
         textAlign:'center'
+    },
+    flex:{
+        flex:1,
+        justifyContent:'center'
     }
 });
 
